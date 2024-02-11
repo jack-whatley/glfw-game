@@ -10,7 +10,9 @@ endif()
 project (glfw-game)
 
 find_package (glfw3 CONFIG REQUIRED)
+add_subdirectory ("thirdParty/glad")
 
 add_executable (glfw-game "src/main.cpp")
 
 target_link_libraries (glfw-game PRIVATE glfw)
+target_link_libraries (glfw-game PRIVATE glfwGlad)
