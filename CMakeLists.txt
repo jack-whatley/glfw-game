@@ -11,6 +11,6 @@ project (glfw-game)
 
 find_package (glfw3 CONFIG REQUIRED)
 
-add_executable (glfw-game main.cpp)
+add_executable (glfw-game "src/main.cpp")
 
 target_link_libraries (glfw-game PRIVATE glfw)
