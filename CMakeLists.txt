@@ -25,6 +25,7 @@ add_executable (glfw-game "${GAME_SOURCES}")
 add_dependencies (glfw-game copy_assets)
 
 target_include_directories (glfw-game PUBLIC "${CMAKE_SOURCE_DIR}/include")
+target_include_directories (glfw-game PRIVATE "${CMAKE_SOURCE_DIR}/thirdParty/stb")
 
 target_link_libraries (glfw-game PRIVATE glfw)
 target_link_libraries (glfw-game PRIVATE glfwGlad)
