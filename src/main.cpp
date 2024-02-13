@@ -10,12 +10,13 @@
 
 GLfloat vertices[] =
 {
-	-0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f,
-	0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f,
-	0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f,
-	-0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f,
-	0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f,
-	0.0f, -0.5f * float(sqrt(3)) / 3, 0.f
+	//                  positions                         /      colours
+	-0.5f,     -0.5f * float(sqrt(3)) / 3,     0.0f,  0.8f, 0.3f,  0.02f,
+	0.5f,      -0.5f * float(sqrt(3)) / 3,     0.0f,  0.8f, 0.3f,  0.02f,
+	0.0f,       0.5f * float(sqrt(3)) * 2 / 3, 0.0f,  1.0f, 0.6f,  0.32f,
+	-0.5f / 2,  0.5f * float(sqrt(3)) / 6,     0.0f,  0.9f, 0.45f, 0.17f,
+	0.5f / 2,   0.5f * float(sqrt(3)) / 6,     0.0f,  0.9f, 0.45f, 0.17f,
+	0.0f,      -0.5f * float(sqrt(3)) / 3,     0.f,   0.8f, 0.3f,  0.02f,
 };
 
 GLuint indices[] =
@@ -56,7 +57,8 @@ int main()
 	VBO vbo1(vertices, sizeof(vertices));
 	EBO ebo1(indices, sizeof(indices));
 
-	vao1.LinkVBO(&vbo1, 0);
+	vao1.LinkAttrib(&vbo1, 0, 3, GL_FLOAT, 6 * sizeof(float), nullptr);
+	vao1.LinkAttrib(&vbo1, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 
 	vao1.Unbind();
 	vbo1.Unbind();
