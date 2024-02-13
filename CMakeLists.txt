@@ -14,21 +14,15 @@ file (GLOB_RECURSE GAME_SOURCES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/src/*.cpp
 # custom command for copying all shaders to out dir
 file (GLOB SHADER_FILES "${CMAKE_SOURCE_DIR}/resources/shaders/*.*")
 
-foreach (SHADER_FILE ${SHADER_FILES})
-	get_filename_component (SHADER_NAME ${SHADER_FILE} NAME)
-	add_custom_command (
-		OUTPUT ${CMAKE_BINARY_DIR}/${SHADER_NAME}
-		COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SHADER_FILE} ${CMAKE_BINARY_DIR}/${SHADER_NAME}
-		MAIN_DEPENDENCY ${SHADER_FILE}
-	)
-endforeach ()
-
-add_custom_target (copy_shaders ALL DEPENDS ${SHADER_FILES})
+add_custom_target (copy_assets
+	COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_LIST_DIR}/copy-assets.cmake
+)
 
 find_package (glfw3 CONFIG REQUIRED)
 add_subdirectory ("thirdParty/glad")
 
 add_executable (glfw-game "${GAME_SOURCES}")
+add_dependencies (glfw-game copy_assets)
 
 target_include_directories (glfw-game PUBLIC "${CMAKE_SOURCE_DIR}/include")
 
