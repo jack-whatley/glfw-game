@@ -15,6 +15,9 @@ class Shader
 
 		void Activate();
 		void Delete();
+
+	private:
+		void compileErrors(unsigned int shader, std::string type);
 };
 
 #endif // !SHADER_CLASS_H
