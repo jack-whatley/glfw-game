@@ -9,10 +9,17 @@ endif()
 
 project (glfw-game)
 
+file (GLOB_RECURSE GAME_SOURCES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/src/*.cpp")
+
+file (COPY "${CMAKE_SOURCE_DIR}/resources/shaders/default.frag" DESTINATION ${CMAKE_BINARY_DIR})
+file (COPY "${CMAKE_SOURCE_DIR}/resources/shaders/default.vert" DESTINATION ${CMAKE_BINARY_DIR})
+
 find_package (glfw3 CONFIG REQUIRED)
 add_subdirectory ("thirdParty/glad")
 
-add_executable (glfw-game "src/main.cpp")
+add_executable (glfw-game "${GAME_SOURCES}")
+
+target_include_directories (glfw-game PUBLIC "${CMAKE_SOURCE_DIR}/include")
 
 target_link_libraries (glfw-game PRIVATE glfw)
 target_link_libraries (glfw-game PRIVATE glfwGlad)
