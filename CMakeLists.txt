@@ -18,6 +18,7 @@ add_custom_target (copy_assets
 
 find_package (glfw3 CONFIG REQUIRED)
 add_subdirectory ("thirdParty/glad")
+add_subdirectory ("thirdParty/glm")
 
 add_executable (glfw-game "${GAME_SOURCES}")
 add_dependencies (glfw-game copy_assets)
@@ -27,3 +28,4 @@ target_include_directories (glfw-game PRIVATE "${CMAKE_SOURCE_DIR}/thirdParty/st
 
 target_link_libraries (glfw-game PRIVATE glfw)
 target_link_libraries (glfw-game PRIVATE glfwGlad)
+target_link_libraries (glfw-game PRIVATE glm)
