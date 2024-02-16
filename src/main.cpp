@@ -78,16 +78,30 @@ int main()
 	Texture popCat("/textures/pop_cat.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	popCat.texUnit(shaderProgram, "tex0", 0);
 
+	float rotation = 0.0f;
+	double prevTime = glfwGetTime();
+
+	glEnable(GL_DEPTH_TEST);
+
 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(0.09f, 0.13f, 0.17f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		shaderProgram.Activate();
+
+		double currentTime = glfwGetTime();
+		if (currentTime - prevTime >= 1/60)
+		{
+			rotation += 0.5f;
+			prevTime = currentTime;
+		}
 
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 view = glm::mat4(1.0f);
 		glm::mat4 proj = glm::mat4(1.0f);
+
+		model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 0.0f));
 		view = glm::translate(view, glm::vec3(0.0f, -0.5f, -2.0f));
 		proj = glm::perspective(glm::radians(45.0f), (float)(winWidth / winHeight), 0.1f, 100.0f);
 
