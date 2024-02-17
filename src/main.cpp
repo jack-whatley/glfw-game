@@ -13,8 +13,8 @@
 #include "texture.h"
 #include "camera.h"
 
-constexpr int winWidth = 800;
-constexpr int winHeight = 800;
+constexpr int winWidth = 1920;
+constexpr int winHeight = 1080;
 
 GLfloat vertices[] =
 { //     COORDINATES     /        COLORS      /   TexCoord  //
@@ -88,7 +88,7 @@ int main()
 
 		shaderProgram.Activate();
 
-		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix");
+		camera.Matrix(90.0f, 0.1f, 1000.0f, shaderProgram, "camMatrix");
 		camera.Inputs(window);
 
 		popCat.Bind();
