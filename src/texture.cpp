@@ -3,7 +3,7 @@
 
 #include <filesystem>
 
-Texture::Texture(const std::string image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType) 
+Texture::Texture(const std::string& image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType) 
 {
 	type = texType;
 	int imgWidth, imgHeight, numColCh;
